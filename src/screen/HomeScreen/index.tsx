@@ -1,21 +1,25 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
-import {styles} from './styles';
+import ProductItem from '../../components/ProductItem';
+import {SafeAreaView, StyleSheet, FlatList} from 'react-native';
+import Products from '../../components/data/products';
+
 const HomeScreen = () => {
   return (
-    <View>
-      <View style={styles.root}>
-        <Image
-          style={styles.image}
-          source={{
-            uri:
-              'https://culimbo.com/static/8768f01b27a4c39f5f8837bccc683ecc/19ca5/RickLaptop.png',
-          }}
-        />
-        <View></View>
-      </View>
-    </View>
+    <SafeAreaView style={styles.page}>
+      <FlatList
+        data={Products}
+        renderItem={({item}) => <ProductItem item={item} />}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={({id}) => id}
+      />
+    </SafeAreaView>
   );
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  page: {
+    padding: 10,
+  },
+});
