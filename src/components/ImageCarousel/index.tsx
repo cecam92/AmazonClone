@@ -29,6 +29,7 @@ const ImageCarousel = ({images}: CarouselProps) => {
           viewAreaCoveragePercentThreshold: 90,
         }}
         onViewableItemsChanged={onFlatListUpdate}
+        keyExtractor={index => index}
         renderItem={({item, index}) => (
           <Image
             key={index}
@@ -41,6 +42,7 @@ const ImageCarousel = ({images}: CarouselProps) => {
       <View style={styles.dots}>
         {images.map((image, index) => (
           <View
+            key={index}
             style={[
               styles.dot,
               // eslint-disable-next-line react-native/no-inline-styles

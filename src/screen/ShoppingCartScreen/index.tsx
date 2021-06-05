@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text, FlatList, View} from 'react-native';
-
 import Button from '../../components/Button';
 import cartItems from '../../components/data/cart';
 import CartProductItem from '../../components/CartProductItem';
+import {useNavigation} from '@react-navigation/native';
 
 const ShoppingCartScreen = () => {
   const totalPrice = cartItems.reduce(
@@ -12,6 +12,12 @@ const ShoppingCartScreen = () => {
       summedPrice + product.item.price * product.quantity,
     0,
   );
+
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    navigation.navigate('addressDetails');
+  };
   return (
     <SafeAreaView style={styles.page}>
       <View>
@@ -27,7 +33,7 @@ const ShoppingCartScreen = () => {
         </View>
         <Button
           text="Procced to checkout"
-          onPress={() => console.warn('go to checkout')}
+          onPress={onPress}
           containerStyle={{backgroundColor: '#f7e300', borderColor: '#f7e300'}}
         />
       </View>

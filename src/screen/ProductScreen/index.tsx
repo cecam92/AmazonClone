@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, ScrollView} from 'react-native';
+import {useRoute} from '@react-navigation/native';
 import {styles} from './styles';
 import Product from '../../components/data/product';
 import {Picker} from '@react-native-picker/picker';
@@ -19,29 +20,19 @@ interface Product {
 }
 
 const ProductScreen = () => {
-  const {
-    id,
-    title,
-    description,
-    image,
-    images,
-    options,
-    avgRating,
-    ratings,
-    price,
-    oldPrice,
-  } = Product;
+  const {title, description, images, options, price, oldPrice} = Product;
   const [selectedOption, setSelectedOption] = useState(
     options ? options[0] : null,
   );
   const [qty, setQty] = useState(0);
 
+  const route = useRoute();
+  const {id} = route.params;
+
   return (
     <ScrollView style={styles.ProductContainer}>
       <Text style={styles.title}>{title}</Text>
-      {/* image Carouse */}
       <ImageCarousel images={images} />
-      {/* option Selector */}
       <Picker
         selectedValue={selectedOption}
         onValueChange={itemValue => setSelectedOption(itemValue)}>
@@ -49,19 +40,12 @@ const ProductScreen = () => {
           <Picker.Item key={index} label={option} value={option} />
         ))}
       </Picker>
-
-      {/* Price */}
       <View style={styles.priceContainer}>
         <Text style={styles.price}>{`From $${price}`}</Text>
         {oldPrice && <Text style={styles.oldPrice}>{` $${oldPrice}`}</Text>}
       </View>
-
-      {/* Descripton */}
       <Text style={styles.description}>{description}</Text>
-
-      {/* quantity Selection */}
       <QuantitySelector quantity={qty} setQuantity={setQty} />
-      {/* Button */}
       <Button
         text="Add To Cart"
         onPress={() => {

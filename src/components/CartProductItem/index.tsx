@@ -1,6 +1,5 @@
 import React, {FunctionComponent, useState} from 'react';
 import {View, Image, Text} from 'react-native';
-
 import QuantitySelector from '../QuantitySelector';
 import {styles} from './styles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -24,7 +23,7 @@ interface CartProductItemProps {
 const CartProductItem: FunctionComponent<CartProductItemProps> = ({
   cartItem,
 }) => {
-  const {id, quantity: quantityProp, option, item} = cartItem;
+  const {quantity: quantityProp, item} = cartItem;
   const [quantity, setQuantity] = useState(quantityProp);
   const {title, image, avgRating, ratings, price, oldPrice} = item;
 

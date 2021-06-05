@@ -1,18 +1,19 @@
 import React from 'react';
 import ProductItem from '../../components/ProductItem';
-import {SafeAreaView, StyleSheet, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
 import Products from '../../components/data/products';
 
-const HomeScreen = () => {
+const HomeScreen = ({searchVaue}: {searchVaue: string}) => {
+  console.log(searchVaue);
   return (
-    <SafeAreaView style={styles.page}>
+    <View style={styles.page}>
       <FlatList
         data={Products}
         renderItem={({item}) => <ProductItem item={item} />}
         showsVerticalScrollIndicator={false}
         keyExtractor={({id}) => id}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
